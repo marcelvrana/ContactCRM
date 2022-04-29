@@ -93,21 +93,20 @@ class XmlService
      */
     public function setContent($file, $params, $parent, $putArray, $webalize)
     {
-//        \Tracy\Debugger::barDump($file);
-//        \Tracy\Debugger::barDump($params);
-//        \Tracy\Debugger::barDump($parent);
-//        \Tracy\Debugger::barDump($putArray);
-//        \Tracy\Debugger::barDump($webalize);
-//        die();
-        $xml = new \SimpleXMLElement($parent);
+        $xml = (file_exists(Constant::DB_DIR . $file)) ? new \SimpleXMLElement(Constant::DB_DIR . $file, 0, true) : new \SimpleXMLElement($parent);
 
         try {
-                $this->putContent($params, $xml, $putArray, $webalize);
+            $this->putContent($params, $xml, $putArray, $webalize);
         } catch (\Exception $e) {
             \Tracy\Debugger::log($e->getMessage());
         }
-
         $xml->asXML(Constant::DB_DIR . $file);
+    }
+
+    public function updateContent($file, $params, $parent, $putArray, $webalize)
+    {
+        $xml = new \SimpleXMLElement(Constant::DB_DIR.$file);
+
     }
 
     /**
@@ -140,18 +139,9 @@ class XmlService
     }
 
     public function get($file, $id){
-
-        $dom = new \DOMDocument();
-        $dom->load(Constant::DB_DIR . $file);
-
-        $xpath = new \DomXPath($dom);
-        $toDelete = $xpath->query('//*[@id="' . $id . '"]');
-        \Tracy\Debugger::barDump($toDelete->item(0));
-//        foreach ($toDelete as $item) {
-//            \Tracy\Debugger::barDump($item);
-//        }
+        $xml = simplexml_load_file(Constant::DB_DIR . $file);
+        return $xml->xpath("//item[@id='".$id."']");
     }
-
 
     /**
      * @param $file

@@ -16,7 +16,7 @@ use Nette\Utils\ArrayHash;
 class UserForm
 {
 
-    public null|int $id;
+    public null|string $id;
 
     use BootstrapRenderTrait;
 
@@ -90,7 +90,11 @@ class UserForm
     public function successForm($form, $values): void
     {
         try {
-            $this->userManager->add($values);
+            if($this->id){
+                $this->userManager->update($values, $this->id);
+            } else {
+                $this->userManager->add($values);
+            }
             $form->getPresenter()->flashMessage('Saved', 'alert-success');
         } catch (\Exception $e) {
             \Tracy\Debugger::log($e->getMessage());
