@@ -17,6 +17,11 @@ class AttributeManager
     ) {
     }
 
+    public function exist(): bool
+    {
+        return file_exists(Constant::DB_DIR . Constant::ATTR_FILE);
+    }
+
     /**
      * @return \SimpleXMLElement|bool
      */
@@ -36,7 +41,6 @@ class AttributeManager
 
         foreach ($xml as $parent) {
             foreach ((array)$parent as $key => $value) {
-                \Tracy\Debugger::barDump($value);
                 if (is_array($value)) {
                     foreach ($value as $subkey => $subvalue) {
                         $content[$i][$subkey] = $subvalue;
@@ -56,7 +60,7 @@ class AttributeManager
     public function update($values)
     {
         try {
-            $this->xmlService->setContent(Constant::ATTR_FILE, $values, Constant::ATTR_PARENT);
+            $this->xmlService->setContent(Constant::ATTR_FILE, $values, Constant::ATTR_PARENT, false, true);
         } catch (\Exception $e) {
             \Tracy\Debugger::log($e->getMessage());
         }

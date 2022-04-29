@@ -10,6 +10,7 @@ class Constant
     public const ATTR_PARENT = '<?xml version="1.0"?><attributes></attributes>';
 
     public const USER_FILE = 'users.xml';
+    public const USER_PARENT = '<?xml version="1.0"?><users></users>';
 
     const DB_DIR = APP_DIR . '/db/';
     const ATTR_PARAMS = [

@@ -21,11 +21,11 @@
   "dependencies": {
     "@popperjs/core": "^2.10.1",
     "bootstrap": "^5.1.1",
-    "jquery": "^3.6.0",
-    "nette-forms": "^3.2.0",
     "chart.js": "^3.3.2",
-    "sortablejs": "^1.13.0",
+    "jquery": "^3.6.0",
+    "js-datepicker": "^5.18.0",
     "naja": "^2.3.0",
+    "nette-forms": "^3.2.0",
     "popper.js": "^1.16.1"
   },
   "devDependencies": {

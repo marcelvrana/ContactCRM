@@ -1,13 +1,2 @@
 <?xml version="1.0"?>
-<attributes>
-    <item id="thr0esjw2g3c">
-        <name>gfdsg</name>
-        <webalized>gfdsg</webalized>
-        <param>date</param>
-    </item>
-    <item id="ounbve17ll4q">
-        <name>gfdsgfdsg</name>
-        <webalized>gfdsgfdsg</webalized>
-        <param>sex</param>
-    </item>
-</attributes>
+<attributes><item id="4qz2x6t02um6"><name>Name</name><webalized>name</webalized><param/></item><item id="bhy0bo0at07b"><name>Surname</name><webalized>surname</webalized><param/></item><item id="vxmifsyduta3"><name>Date of Birth</name><webalized>dateofbirth</webalized><param>date</param></item><item id="0k9v33wa2am4"><name>Sex</name><webalized>sex</webalized><param>sex</param></item></attributes>

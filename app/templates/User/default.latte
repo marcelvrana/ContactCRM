@@ -1,2 +1,36 @@
 {block content}
     <h1 n:block="title"> Users</h1>
+
+<a n:href="add" class="btn btn-warning btn-sm">Add User</a>
+
+<div class="table-responsive my-5">
+    <table class="table table-striped" n:if="$items && $attributes">
+        <thead>
+        <tr>
+            <th n:foreach="$attributes as $attr">
+                {$attr['name']}
+            </th>
+            <th style="width: 50px;">Actions</th>
+        </tr>
+        </thead>
+        <tbody n:snippet="users">
+        {dump $items}
+        <tr n:foreach="$items as $item">
+            {dump $item}
+
+            <td n:foreach="$attributes as $attr">
+                {dump $attr['webalized']}
+                {$item->{$attr['webalized']}}
+            </td>
+
+            <td>
+                <div class="btn-group">
+                    <a n:href="edit, (string)$item->attributes()->id" class="btn btn-sm btn-info text-white" data-naja-history="off">edit</a>
+                    <a n:href="delete!, (string)$item->attributes()->id" class="btn btn-sm btn-danger ajax" data-naja-history="off">delete</a>
+                </div>
+            </td>
+            {*                {dump simplexml_load_string($item->@parameters)}*}
+        </tr>
+        </tbody>
+    </table>
+</div>

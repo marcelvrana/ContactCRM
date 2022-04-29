@@ -19,29 +19,54 @@ final class AttributePresenter extends BasePresenter
     #[Inject]
     public AttributeForm $attributeForm;
 
+    /**
+     *
+     */
     public function startup()
     {
         parent::startup();
         if ($this->getAction() == 'edit') {
-            $this->copies = $this->attributeManager->getCount();
+            if ($this->attributeManager->exist()) {
+                $this->copies = $this->attributeManager->getCount();
+            }
         }
     }
 
+    /**
+     *
+     */
     public function renderDefault()
     {
-        $this->template->items = $this->attributeManager->getContent();
+        $this->template->items = $this->attributeManager->exist() ? $this->attributeManager->getContent() : null;
     }
 
+
+    /**
+     *
+     */
     public function renderEdit()
     {
-        $this['attributeForm']['attributeitems']->setDefaults($this->attributeManager->getArrayContent());
+        if ($this->attributeManager->exist()) {
+            $this['attributeForm']['attributeitems']->setDefaults($this->attributeManager->getArrayContent());
+        }
     }
 
+    /**
+     * @param $id
+     * @throws Nette\Application\AbortException
+     */
     public function handleDelete($id)
     {
-        \Tracy\Debugger::barDump($this->attributeManager->delete($id));
+        $this->attributeManager->delete($id) ? $this->flashMessage('Deleted', 'alert-success') : $this->flashMessage(
+            'Error',
+            'alert-danger'
+        );
+        $this->isAjax() ? $this->redrawControl() : $this->redirect('this');
     }
 
+    /**
+     * @return Form
+     */
     protected function createComponentAttributeForm(): Form
     {
         $this->attributeForm->copies = $this->copies;

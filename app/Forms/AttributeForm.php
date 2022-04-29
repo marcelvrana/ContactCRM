@@ -78,11 +78,10 @@ class AttributeForm
      */
     public function validateForm(Form $form, ArrayHash $values)
     {
-        \Tracy\Debugger::barDump($form->isSubmitted()->getName());
-//        if ($form->isSubmitted()->getName() == 'multiplier_remover' || $form->isSubmitted()->getName(
-//            ) == 'multiplier_creator') {
+        if ($form->isSubmitted()->getName() == 'multiplier_remover' || $form->isSubmitted()->getName(
+            ) == 'multiplier_creator') {
             $form->getPresenter()->redrawControl();
-//        }
+        }
     }
 
 
@@ -102,8 +101,6 @@ class AttributeForm
      */
     public function successForm($form, $values): void
     {
-        \Tracy\Debugger::barDump($values);
-        die();
         try {
             $this->attributeManager->update($values->attributeitems);
             $form->getPresenter()->flashMessage('Saved', 'alert-success');

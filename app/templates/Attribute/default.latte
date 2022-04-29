@@ -3,8 +3,8 @@
 
 <a n:href="edit" class="btn btn-warning btn-sm">Edit Attributes</a>
 
-<div class="table-responsive">
-    <table class="table table-striped">
+<div class="table-responsive my-5">
+    <table class="table table-striped" n:if="$items">
         <thead>
             <tr>
                 <th>Name</th>
@@ -12,7 +12,7 @@
                 <th style="width: 50px;">Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody n:snippet="attributes">
             <tr n:foreach="$items as $item">
                 <td>
                     {$item->name}
