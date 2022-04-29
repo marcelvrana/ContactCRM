@@ -1,7 +1,46 @@
 {block content}
 
-<h1 n:block="title">Add attribute</h1>
+<h1 n:block="title">Edit Attributes</h1>
 <div class="spacer-10"></div>
 {snippet attributeForm}
-    {control attributeForm}
+    {form attributeForm}
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Možnosti selectu
+                </div>
+                <div class="card-body">
+                    <div class="optionParent mb-5" n:multiplier="attributeitems">
+                        {label name /}
+                        {input name}
+                        {label param /}
+                        {input param}
+                        {input id}
+                        {btnRemove 'class' => 'mt-2 btn btn-sm btn-danger removeParent ajax'}
+                    </div>
+                        {btnCreate attributeitems class => 'btn btn-sm btn-info text-white ajax'}
+                </div>
+                <div class="card-footer">
+                    {input submit}
+                </div>
+            </div>
+
+        </div>
+    {/form}
 {/snippet}
+
+
+<script>
+    let removeOption = () => {
+        let $optionButton = document.querySelectorAll('.removeParent');
+        if ($optionButton.length) {
+            $optionButton.forEach(function (element) {
+                element.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    event.target.closest('.optionParent').remove();
+                })
+            });
+        }
+    }
+    removeOption();
+</script>

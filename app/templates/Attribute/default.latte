@@ -1,2 +1,30 @@
 {block content}
 <h1 n:block="title">Attributes</h1>
+
+<a n:href="edit" class="btn btn-warning btn-sm">Edit Attributes</a>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Param</th>
+                <th style="width: 50px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr n:foreach="$items as $item">
+                <td>
+                    {$item->name}
+                </td>
+                <td>
+                    {$item->param}
+                </td>
+                <td>
+                    <a n:href="delete!, (string)$item->attributes()->id" class="btn btn-sm btn-danger ajax" data-naja-history="off">delete</a>
+                </td>
+{*                {dump simplexml_load_string($item->@parameters)}*}
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Forms;
 
-use App\AdminModule\Forms\BootstrapRenderTrait;
+use App\Forms\BootstrapRenderTrait;
 use App\Model\Service\XmlService;
 use Nette\Application\UI\Form;
 use Nette\Forms\Container;

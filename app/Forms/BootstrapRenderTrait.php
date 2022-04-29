@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\AdminModule\Forms;
+namespace App\Forms;
 
 use Nette\Application\UI\Form;
 

@@ -25,12 +25,11 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.(png|jpeg|svg|gif)$/,
+                test: /\.(png|jpg|svg|gif)$/,
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]',
-                    outputPath: 'images/',
-                    // publicPath: 'images/',
+                    outputPath: 'images/'
                 }
             },
             {
@@ -38,7 +37,8 @@ const config = {
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]',
-                    outputPath: 'fonts/'
+                    outputPath: 'font',
+                    publicPath: 'font',
                 }
             },
             {

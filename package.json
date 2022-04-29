@@ -21,7 +21,6 @@
   "dependencies": {
     "@popperjs/core": "^2.10.1",
     "bootstrap": "^5.1.1",
-    "bootstrap-icons": "^1.8.1",
     "jquery": "^3.6.0",
     "nette-forms": "^3.2.0",
     "chart.js": "^3.3.2",

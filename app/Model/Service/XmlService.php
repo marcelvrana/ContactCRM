@@ -7,8 +7,10 @@ namespace App\Model\Service;
 use App\Constant\Constant;
 use Nette\Utils\Random;
 use Nette\Utils\Strings;
+use Nette\Utils\Validators;
 
-class XmlService{
+class XmlService
+{
 
 
     /***/
@@ -17,74 +19,70 @@ class XmlService{
     }
 
 
-       public function putContent($params, &$xml)
-        {
-            foreach ($params as $key => $value) {
-                \Tracy\Debugger::barDump($key);
-                \Tracy\Debugger::barDump($value);
-                \Tracy\Debugger::barDump(is_array($value));
-                if (is_array($value)) {
-                    if (is_numeric($key)) {
-                        $key = 'item';
+    private function putContent($params, &$xml)
+    {
+        foreach ($params as $key => $value) {
+            if (Validators::is($value, 'object')) {
+                if (is_numeric($key)) {
+                    $key = 'item';
+                }
+                $subnode = $xml->addChild($key);
+                $this->putContent($value, $subnode);
+            } else {
+                if ($key == 'id') {
+                    if (!$value) {
+                        $value = Random::generate(12);
                     }
-                    $subnode = $xml->addChild($key);
-                    $this->putContent($value, $subnode);
+                    $xml->addAttribute('id', $value);
                 } else {
-                    $xml->addChild("$key", htmlspecialchars("$value"));
-                    $xml->addChild("webalized", htmlspecialchars(Strings::webalize($value)));
+                    $xml->addChild("$key", htmlspecialchars((string) $value ?? ''));
+                    if($key != 'param'){
+                        $xml->addChild("webalized", htmlspecialchars(Strings::webalize($value)));
+                    }
                 }
             }
-//            foreach ($params as $param){
-//                $item = $xml->addChild('item');
-//                foreach ($param as $key => $value){
-//                    if($key == 'id'){
-//                        if (!$value){
-//                            $value = Random::generate(12);
-//                        }
-//                        $item->addAttribute('itemId', $value);
-//                    } else {
-//                        $item->addChild("$key", htmlspecialchars("$value"));
-//                        $item->addChild("webalized", htmlspecialchars(Strings::webalize($value)));
-//                    }
-//
-//                }
-//            }
-//            return $item;
         }
+    }
 
 
-
-    public function create($file, $params, $parent){
-
+    public function setContent($file, $params, $parent)
+    {
         $xml = new \SimpleXMLElement($parent);
 
         try {
-            $this->putContent($xml, $params);
+            $this->putContent($params, $xml);
         } catch (\Exception $e) {
             \Tracy\Debugger::log($e->getMessage());
         }
 
-
-
         $xml->asXML(Constant::DB_DIR . $file);
     }
 
-    public function get($file){
-
+    public function getContent($file)
+    {
+        return simplexml_load_file( Constant::DB_DIR . $file);
     }
 
-    public function update($file, $params, $parent){
-        if( is_file(Constant::DB_DIR . $file )){
-            $dom = new \DOMDocument();
-            $dom->loadXML(Constant::DB_DIR . $file);
-            $path = new \DOMXPath($dom);
+//    public function update($file, $params, $parent){
+//        if( is_file(Constant::DB_DIR . $file )){
+//            $dom = new \DOMDocument();
+//            $dom->loadXML(Constant::DB_DIR . $file);
+//            $path = new \DOMXPath($dom);
+//
+//        } else {
+//            $this->create($file, $params, $parent);
+//        }
+//    }
 
-        } else {
-            $this->create($file, $params, $parent);
-        }
-    }
-
-    public function delete($file, $item){
-
+    public function delete($file, $id)
+    {
+        $library = new \SimpleXMLElement(Constant::DB_DIR . $file);
+        \Tracy\Debugger::barDump($library);
+        die();
+        $book = $library->xpath('/library/book[author="J.R.R.Tolkein"]');
+        $book[0]->title .= ' Series';
+        // header("Content-type: text/xml");
+        // echo $library->asXML();
+        $library->asXML('library_modified.xml');
     }
 }

@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Forms;
 
-use App\AdminModule\Forms\BootstrapRenderTrait;
+use App\Forms\BootstrapRenderTrait;
+use App\Constant\Constant;
 use App\Model\Manager\AttributeManager;
 use Nette\Application\UI\Form;
 use Nette\Forms\Container;
 use Nette\SmartObject;
 use Nette\Utils\ArrayHash;
+use Nette\Utils\Arrays;
 use Nette\Utils\Strings;
 
 class AttributeForm
@@ -35,23 +37,31 @@ class AttributeForm
 
         $form->addProtection('Form protection');
 
-        $form->addGroup('Fill user data');
-        $multiplier = $form->addMultiplier('attributes', function (Container $container, Form $form) {
+        $form->addGroup('Fill attribute data');
+        $multiplier = $form->addMultiplier('attributeitems', function (Container $container, Form $form) {
             $container->addText('name', 'Attribute name')
                 ->setRequired(false)
                 ->setDefaultValue('');
+
+            $container->addSelect('param', 'Parameter (if needed)', Constant::ATTR_PARAMS)
+                ->setRequired(false)
+                ->setDefaultValue('');
+
             $container->addHidden('id')
                 ->setRequired(false)
                 ->setDefaultValue('');
+
         }, $this->copies, $this->maxCopies);
 
-        $multiplier->addCreateButton('Pridať')
+        $multiplier->addCreateButton('Add Item')
             ->addClass('btn btn-info btn-sm');
-        $multiplier->addRemoveButton('Odstrániť')
+
+        $multiplier->addRemoveButton('Delete Item')
             ->addClass('btn btn-danger btn-sm');
 
-        $form->addGroup();
-        $form->addSubmit('submit', 'Uložiť')
+
+        $form->addGroup('Save');
+        $form->addSubmit('submit', 'Save')
         ->setHtmlAttribute('class', 'ajax');
 
         $form->onValidate[] = [$this, 'validateForm'];
@@ -68,10 +78,11 @@ class AttributeForm
      */
     public function validateForm(Form $form, ArrayHash $values)
     {
-        if ($form->isSubmitted()->getName() == 'multiplier_remover' || $form->isSubmitted()->getName(
-            ) == 'multiplier_creator') {
+        \Tracy\Debugger::barDump($form->isSubmitted()->getName());
+//        if ($form->isSubmitted()->getName() == 'multiplier_remover' || $form->isSubmitted()->getName(
+//            ) == 'multiplier_creator') {
             $form->getPresenter()->redrawControl();
-        }
+//        }
     }
 
 
@@ -91,13 +102,14 @@ class AttributeForm
      */
     public function successForm($form, $values): void
     {
+        \Tracy\Debugger::barDump($values);
+        die();
         try {
-            $this->attributeManager->update($values->attributes);
+            $this->attributeManager->update($values->attributeitems);
             $form->getPresenter()->flashMessage('Saved', 'alert-success');
         } catch (\Exception $e) {
             \Tracy\Debugger::log($e->getMessage());
             $form->getPresenter()->flashMessage('Error: '. $e->getMessage(), 'alert-danger');
-
         }
         $form->getPresenter()->redrawControl();
     }
