@@ -8,9 +8,19 @@ Requirements
 
 Installation
 ------------
+Install dependencies over composer and npm
 
-	composer i
-    npm i
+	$ composer i
+    $ npm i
+
+When you have installed npm, you can run
+
+    *** Development with watch files ***
+    $ npm run dev
+
+    *** Compile production files ***
+    $ npm run prod
+
 
 Web Server Setup
 ----------------

@@ -46,7 +46,6 @@ class XmlService
         if($putArray){
             $parent = $xml->addChild('item');
             foreach ($params as $key => $value) {
-                \Tracy\Debugger::barDump($key);
                 $this->processXml($parent, $key, $value, $webalize);
             }
         } else {

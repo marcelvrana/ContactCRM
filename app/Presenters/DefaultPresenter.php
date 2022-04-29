@@ -12,18 +12,7 @@ final class DefaultPresenter extends BasePresenter
 {
 
     public function renderDefault(){
-
+        $this->template->users = $this->userManager->getContentForChart();
     }
 
-    public function renderAdd(){
-
-    }
-
-    public function renderEdit($id){
-
-    }
-
-    public function handleDelete($id){
-
-    }
 }

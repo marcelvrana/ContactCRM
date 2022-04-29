@@ -17,10 +17,12 @@ class AttributeManager
     ) {
     }
 
+
     public function exist(): bool
     {
         return file_exists(Constant::DB_DIR . Constant::ATTR_FILE);
     }
+
 
     /**
      * @return \SimpleXMLElement|bool
@@ -29,6 +31,7 @@ class AttributeManager
     {
         return $this->xmlService->getContent(Constant::ATTR_FILE);
     }
+
 
     /**
      * @return array
@@ -55,6 +58,14 @@ class AttributeManager
     }
 
     /**
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return count($this->xmlService->getContent(Constant::ATTR_FILE));
+    }
+
+    /**
      * @param $values
      */
     public function update($values)
@@ -66,13 +77,7 @@ class AttributeManager
         }
     }
 
-    /**
-     * @return int
-     */
-    public function getCount(): int
-    {
-        return count($this->xmlService->getContent(Constant::ATTR_FILE));
-    }
+
 
     /**
      * @param $id

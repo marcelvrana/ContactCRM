@@ -16,7 +16,7 @@ use Nette\DI\Attributes\Inject;
 final class UserPresenter extends BasePresenter
 {
     #[Persistent]
-    public null|string $id;
+    public null|string $id = null;
 
 
     #[Inject]
@@ -32,6 +32,7 @@ final class UserPresenter extends BasePresenter
     }
 
     public function renderDefault(){
+        $this->id = null;
         $this->template->items = $this->userManager->exist() ? $this->userManager->getContent() : null;
         $this->template->attributes = $this->attributeManager->exist() ? $this->attributeManager->getArrayContent() : null;
     }

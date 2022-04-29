@@ -35,42 +35,35 @@ class UserForm
 
 
         $form->addGroup('Fill user data');
-        foreach($this->attributeManager->getArrayContent() as $item){
-
-            if(is_string($item['param'])){
-                switch ($item['param']){
+        foreach ($this->attributeManager->getArrayContent() as $item) {
+            if (is_string($item['param'])) {
+                switch ($item['param']) {
                     case 'date':
                         $form->addText($item['webalized'], $item['name'])
-                        ->setHtmlAttribute('data-param', $item['param'] );
+                            ->setHtmlAttribute('data-param', $item['param']);
                         break;
                     case 'sex':
                         $form->addSelect($item['webalized'], $item['name'], Constant::SEX_ITEMS);
                         break;
                     default:
                         break;
-
                 }
             } else {
                 $form->addText($item['webalized'], $item['name']);
             }
-
         }
         $form->addHidden('id')
             ->setRequired(false)
             ->setDefaultValue('');
 
         $form->addGroup('Save');
-        $form->addSubmit('submit', 'Save')
-            ->setHtmlAttribute('class', 'ajax');
+        $form->addSubmit('submit', 'Save');
 
         $form->onError[] = [$this, 'errorForm'];
         $form->onSuccess[] = [$this, 'successForm'];
 
         return $this->setBootstrapRender($form);
-
     }
-
-
 
 
     /**
@@ -90,7 +83,7 @@ class UserForm
     public function successForm($form, $values): void
     {
         try {
-            if($this->id){
+            if ($this->id) {
                 $this->userManager->update($values, $this->id);
             } else {
                 $this->userManager->add($values);
@@ -98,9 +91,10 @@ class UserForm
             $form->getPresenter()->flashMessage('Saved', 'alert-success');
         } catch (\Exception $e) {
             \Tracy\Debugger::log($e->getMessage());
-            $form->getPresenter()->flashMessage('Error: '. $e->getMessage(), 'alert-danger');
+            $form->getPresenter()->flashMessage('Error: ' . $e->getMessage(), 'alert-danger');
+            $form->getPresenter()->redrawControl();
         }
-        $form->getPresenter()->redrawControl();
+        $form->getPresenter()->redirect('default');
     }
 
 }

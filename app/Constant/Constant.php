@@ -21,7 +21,7 @@ class Constant
 
     const SEX_ITEMS = [
         'male' => 'Male',
-        'woman' => 'woman',
+        'woman' => 'Woman',
         'other' => 'Other',
     ];
 

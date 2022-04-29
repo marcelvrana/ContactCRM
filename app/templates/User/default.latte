@@ -14,15 +14,10 @@
         </tr>
         </thead>
         <tbody n:snippet="users">
-        {dump $items}
         <tr n:foreach="$items as $item">
-            {dump $item}
-
             <td n:foreach="$attributes as $attr">
-                {dump $attr['webalized']}
                 {$item->{$attr['webalized']}}
             </td>
-
             <td>
                 <div class="btn-group">
                     <a n:href="edit, (string)$item->attributes()->id" class="btn btn-sm btn-info text-white" data-naja-history="off">edit</a>
