@@ -6,12 +6,24 @@
         <dateofbirth>06/04/2022</dateofbirth>
         <sex>male</sex>
     </item>
-    
+
     <item id="w3wpn72d3otn">
         <name>test3</name>
         <surname>test3</surname>
         <dateofbirth>06/04/2022</dateofbirth>
         <sex>male</sex>
     </item>
-    
-<item id="w3wpr7jd3otn"><name>supertest</name><surname>test5</surname><dateofbirth>06/04/2022</dateofbirth><sex>male</sex></item><item id="w3wpn7jd4otn"><name>ultra</name><surname>test2</surname><dateofbirth>06/04/2022</dateofbirth><sex>male</sex></item></users>
+
+    <item id="w3wpr7jd3otn">
+        <name>supertest</name>
+        <surname>test5</surname>
+        <dateofbirth>06/04/2022</dateofbirth>
+        <sex>male</sex>
+    </item>
+    <item id="w3wpn7jd4otn">
+        <name>ultra</name>
+        <surname>test2</surname>
+        <dateofbirth>06/04/2022</dateofbirth>
+        <sex>male</sex>
+    </item>
+</users>
