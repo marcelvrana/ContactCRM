@@ -18,6 +18,9 @@ class AttributeManager
     }
 
 
+    /**
+     * @return bool
+     */
     public function exist(): bool
     {
         return file_exists(Constant::DB_DIR . Constant::ATTR_FILE);

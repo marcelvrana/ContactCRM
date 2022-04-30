@@ -45,19 +45,41 @@ class UserManager
         }
     }
 
-    public function getContentForChart(){
+    /**
+     * @param $date
+     * @return int|string
+     */
+    private function calcAge($date): int|string
+    {
+        $birthDate = explode("/", $date);
+        return (date(
+            "md",
+            (int)date("U", mktime(0, 0, 0, (int)$birthDate[0], (int)$birthDate[1], (int)$birthDate[2]))
+        ) > date("md")
+            ? ((date("Y") - $birthDate[2]) - 1)
+            : (date("Y") - $birthDate[2]));
+    }
+
+    /**
+     * @return array
+     */
+    public function getContentForChart(): array
+    {
         $content = $this->getContent();
         $data = [];
         $i = 0;
-        foreach($content as $cont){
+        foreach ($content as $cont) {
             $user = (array)$cont;
             $data['label'][$i] = $user['name'] . ' ' . $user['surname'];
-            $data['years'][$i] = $user['dateofbirth'];
+            $data['years'][$i] = $this->calcAge($user['dateofbirth']);
             $i++;
         }
         return $data;
     }
 
+    /**
+     * @param $params
+     */
     public function add($params)
     {
         try {
@@ -68,6 +90,7 @@ class UserManager
     }
 
     /**
+     * @param $item
      * @return array
      */
     private function makeArrayFromItem($item): array
@@ -88,6 +111,10 @@ class UserManager
         return $content;
     }
 
+    /**
+     * @param $params
+     * @param $id
+     */
     public function update($params, $id)
     {
         try {

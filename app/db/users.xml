@@ -1,9 +1,4 @@
 <?xml version="1.0"?>
 <users>
-    <item id="fg78whbr71qr">
-        <name>Jan</name>
-        <surname>Novak</surname>
-        <dateofbirth>03/01/1990</dateofbirth>
-        <sex>male</sex>
-    </item>
-<item id="19o9v6nr228s"><name>Lukas</name><surname>Fialka</surname><dateofbirth>16/05/1992</dateofbirth><sex>male</sex></item><item id="rtm7kaf3ptc0"><name>Samuel</name><surname>Snilek</surname><dateofbirth>10/04/1989</dateofbirth><sex>male</sex></item><item id="43qu7f6lpvvv"><name>Fialka</name><surname>Vonava</surname><dateofbirth>18/05/1978</dateofbirth><sex>woman</sex></item><item id="llpherlciwo5"><name>Johanka</name><surname>Zarku</surname><dateofbirth>14/08/1879</dateofbirth><sex>woman</sex></item><item id="8v338eg3ps4w"><name>Tereza</name><surname>Narodena</surname><dateofbirth>08/09/1960</dateofbirth><sex>woman</sex></item><item id="9dx1px4f49uh"><name>Julius</name><surname>Ceasar</surname><dateofbirth>14/04/1200</dateofbirth><sex>male</sex></item><item id="tp4c557iow08"><name>Napoleon</name><surname>Bonaparte</surname><dateofbirth>02/08/1984</dateofbirth><sex>male</sex></item></users>
+    
+<item id="19o9v6nr228s"><name>Lukas</name><surname>Fialka</surname><dateofbirth>16/05/1992</dateofbirth><sex>male</sex></item><item id="rtm7kaf3ptc0"><name>Samuel</name><surname>Snilek</surname><dateofbirth>10/04/1989</dateofbirth><sex>male</sex></item><item id="43qu7f6lpvvv"><name>Fialka</name><surname>Vonava</surname><dateofbirth>18/05/1978</dateofbirth><sex>woman</sex></item><item id="8v338eg3ps4w"><name>Tereza</name><surname>Narodena</surname><dateofbirth>08/09/1960</dateofbirth><sex>woman</sex></item><item id="tp4c557iow08"><name>Napoleon</name><surname>Bonaparte</surname><dateofbirth>02/08/1984</dateofbirth><sex>male</sex></item><item id="fg78whbr71qr"><name>Jan</name><surname>Novak</surname><dateofbirth>31/05/1984</dateofbirth><sex>male</sex></item><item id="9dx1px4f49uh"><name>Julius</name><surname>Ceasar</surname><dateofbirth>16/05/1984</dateofbirth><sex>male</sex></item><item id="llpherlciwo5"><name>Johanka</name><surname>Zarku</surname><dateofbirth>23/05/1976</dateofbirth><sex>woman</sex></item></users>

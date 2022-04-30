@@ -18,6 +18,12 @@ class XmlService
     {
     }
 
+    /**
+     * @param $xml
+     * @param $key
+     * @param $value
+     * @param $webalize
+     */
     private function processXml($xml, $key, $value, $webalize){
         if ($key == 'id') {
             if (!$value) {
@@ -40,6 +46,8 @@ class XmlService
     /**
      * @param $params
      * @param $xml
+     * @param $putArray
+     * @param $webalize
      */
     private function putContent($params, &$xml, $putArray, $webalize)
     {
@@ -63,31 +71,12 @@ class XmlService
         }
     }
 
-    public function putArrayContent($params, &$xml, $webalize)
-    {
-        $xml->addChild('item');
-        foreach ($params as $key => $value) {
-            if ($key == 'id') {
-                if (!$value) {
-                    $value = Random::generate(12);
-                }
-                $xml->addAttribute('id', $value);
-            } else {
-                $xml->addChild("$key", htmlspecialchars((string)$value ?? ''));
-                if ($webalize) {
-                    $xml->addChild(
-                        "webalized",
-                        Strings::replace(Strings::webalize($value), "/[^a-zA-Z0-9]+/", '')
-                    );
-                }
-            }
-        }
-    }
-
     /**
      * @param $file
      * @param $params
      * @param $parent
+     * @param $putArray
+     * @param $webalize
      * @throws \Exception
      */
     public function setContent($file, $params, $parent, $putArray, $webalize)
@@ -142,29 +131,4 @@ class XmlService
         return $xml->xpath("//item[@id='".$id."']");
     }
 
-    /**
-     * @param $file
-     * @param $params
-     * @param $parent
-     * @param false $putArray
-     * @throws \Exception
-     */
-    public function addContent($file, $params, $parent, $putArray, $webalize)
-    {
-        if (file_exists(Constant::DB_DIR . $file)) {
-            $xml = simplexml_load_file(Constant::DB_DIR . $file);
-            try {
-                if ($putArray) {
-                    $this->putArrayContent($params, $xml, $webalize);
-                } else {
-                    $this->putContent($params, $xml, $webalize);
-                }
-            } catch (\Exception $e) {
-                \Tracy\Debugger::log($e->getMessage());
-            }
-            $xml->asXML($file);
-        } else {
-            $this->setContent($file, $params, $parent, $putArray, $webalize);
-        }
-    }
 }
