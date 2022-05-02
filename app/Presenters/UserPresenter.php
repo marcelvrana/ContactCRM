@@ -22,11 +22,11 @@ final class UserPresenter extends BasePresenter
     #[Inject]
     public UserForm $userForm;
 
-    protected function startup()
+    protected function beforeRender()
     {
-        parent::startup();
+//        parent::startup();
         if(!$this->attributeManager->exist()){
-            $this->flashMessage('You need attributes first', 'alert-danger');
+            $this->flashMessage('You need fill some attributes first', 'alert-danger');
             $this->redirect('Attribute:default');
         }
     }
