@@ -1,9 +1,7 @@
 //JS
-import bootstrap from 'bootstrap';
-import Popper from "popper.js";
+
 import naja from 'naja';
 import netteForms from 'nette-forms';
-// import 'js-datepicker/dist/datepicker.min';
 import datepicker from 'js-datepicker'
 import Chart from 'chart.js/auto';
 
@@ -30,7 +28,3 @@ if(document.querySelector('[data-param="date"]')){
         }
     });
 }
-
-window.addEventListener("load", function () {
-    // document.getElementById('loader').style.display = "none";
-});
