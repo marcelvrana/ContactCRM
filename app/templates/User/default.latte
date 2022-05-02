@@ -4,7 +4,7 @@
 <a n:href="add" class="btn btn-warning btn-sm">Add User</a>
 
 <div class="table-responsive my-5">
-    <table class="table table-striped" n:if="$items && $attributes">
+    <table class="table table-striped" n:if="(isset($items) && $items) && (isset($attributes) && $attributes)">
         <thead>
         <tr>
             <th n:foreach="$attributes as $attr">

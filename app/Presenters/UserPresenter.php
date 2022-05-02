@@ -18,7 +18,6 @@ final class UserPresenter extends BasePresenter
     #[Persistent]
     public null|string $id = null;
 
-
     #[Inject]
     public UserForm $userForm;
 

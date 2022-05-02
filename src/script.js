@@ -30,3 +30,7 @@ if(document.querySelector('[data-param="date"]')){
         }
     });
 }
+
+window.addEventListener("load", function () {
+    // document.getElementById('loader').style.display = "none";
+});

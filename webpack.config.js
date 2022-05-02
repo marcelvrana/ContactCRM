@@ -25,7 +25,7 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.(png|jpg|svg|gif)$/,
+                test: /\.(png|jpg|svg|gif)$/i,
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]',

@@ -1,13 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{$basePath}/dist/main.css">
-
     <title>{ifset title}{include title|stripHtml} | {/ifset}eFabrica Users CRM</title>
 </head>
 <body>
@@ -44,6 +40,8 @@
     <div class="spacer-15"></div>
     {include content}
 </div>
+
+<div id="loader"></div>
 
 <script src="{$basePath}/dist/bundle.js"></script>
 {block scripts}
